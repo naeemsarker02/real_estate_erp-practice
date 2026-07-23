@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getProjects } from '../api/projects';
+import { useAuth } from '../context/AuthContext';
 
 export default function ProjectListPage() {
+  const { user } = useAuth();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -19,7 +21,14 @@ export default function ProjectListPage() {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Projects</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Projects</h1>
+        {user?.role === 'admin' && (
+          <Link to="/projects/create" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            + New Project
+          </Link>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {projects.map((project) => (
