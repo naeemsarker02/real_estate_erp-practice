@@ -4,6 +4,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import ProjectListPage from './pages/ProjectListPage';
+import UnitListPage from './pages/UnitListPage';
 
 function App() {
   return (
@@ -20,6 +22,12 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/projects" element={
+            <ProtectedRoute><ProjectListPage /></ProtectedRoute>
+          } />
+          <Route path="/units" element={
+            <ProtectedRoute><UnitListPage /></ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
